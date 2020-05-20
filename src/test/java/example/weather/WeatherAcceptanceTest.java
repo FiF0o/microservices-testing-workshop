@@ -26,10 +26,12 @@ public class WeatherAcceptanceTest {
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(8089);
 
-
     @Test
-    public void shouldReturnYesterdaysWeather() throws Exception {
-        wireMockRule.stubFor(get(urlPathEqualTo("/some-test-api-key/53.5511,9.9937"))
+    public void shouldReturnCurrentWeather() throws Exception {
+        wireMockRule.stubFor(get(urlPathEqualTo("/data/2.5/weather"))
+                .withQueryParam("q", equalTo("Bangkok"))
+                .withQueryParam("units", equalTo("metric"))
+                .withQueryParam("appid", equalTo("some-test-api-key"))
                 .willReturn(aResponse()
                         .withBody(FileLoader.read("classpath:weatherApiResponse.json"))
                         .withHeader(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -39,6 +41,6 @@ public class WeatherAcceptanceTest {
                 .get(String.format("http://localhost:%s/weather", port))
                 .then()
                 .statusCode(is(200))
-                .body(containsString("Rain"));
+                .body(containsString("Clouds"));
     }
 }

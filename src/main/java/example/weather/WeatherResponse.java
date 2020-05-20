@@ -2,23 +2,27 @@ package example.weather;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherResponse {
 
-    private Currently currently;
+    private List<Weather> weather;
 
     public WeatherResponse() {}
 
-    public WeatherResponse(String currentSummary) {
-        this.currently = new Currently(currentSummary);
+    public WeatherResponse(String currentMain) {
+        this.weather = Collections.singletonList(new Weather(currentMain));
     }
 
-    public Currently getCurrently() {
-        return currently;
+    public Weather getWeather() {
+        return weather.get(0);
     }
 
-    public String getSummary() {
-        return currently.getSummary();
+    public String getMain() {
+        return weather.get(0).getMain();
     }
 
     @Override
@@ -28,33 +32,33 @@ public class WeatherResponse {
 
         WeatherResponse response = (WeatherResponse) o;
 
-        return currently != null ? currently.equals(response.currently) : response.currently == null;
+        return weather != null ? weather.equals(response.weather) : response.weather == null;
     }
 
     @Override
     public int hashCode() {
-        return currently != null ? currently.hashCode() : 0;
+        return weather != null ? weather.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "WeatherResponse{" +
-                "currently=" + currently +
+                "weather=" + weather +
                 '}';
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Currently {
-        private String summary;
+    public static class Weather {
+        private String main;
 
-        public Currently() {}
+        public Weather() {}
 
-        public Currently(String summary) {
-            this.summary = summary;
+        public Weather(String main) {
+            this.main = main;
         }
 
-        public String getSummary() {
-            return summary;
+        public String getMain() {
+            return main;
         }
 
         @Override
@@ -62,20 +66,20 @@ public class WeatherResponse {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            Currently currently = (Currently) o;
+            Weather weather = (Weather) o;
 
-            return summary != null ? summary.equals(currently.summary) : currently.summary == null;
+            return Objects.equals(main, weather.main);
         }
 
         @Override
         public int hashCode() {
-            return summary != null ? summary.hashCode() : 0;
+            return main != null ? main.hashCode() : 0;
         }
 
         @Override
         public String toString() {
-            return "Currently{" +
-                    "summary='" + summary + '\'' +
+            return "Weather{" +
+                    "main='" + main + '\'' +
                     '}';
         }
     }

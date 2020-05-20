@@ -40,7 +40,7 @@ public class ExampleController {
     @GetMapping("/weather")
     public String weather() {
         return weatherClient.fetchWeather()
-                .map(WeatherResponse::getSummary)
+                .map(WeatherResponse::getMain)
                 .orElse("Sorry, I couldn't fetch the weather for you :(");
     }
 }

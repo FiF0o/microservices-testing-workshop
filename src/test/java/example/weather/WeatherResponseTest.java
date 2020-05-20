@@ -12,7 +12,7 @@ public class WeatherResponseTest {
     @Test
     public void shouldDeserializeJson() throws Exception {
         String jsonResponse = FileLoader.read("classpath:weatherApiResponse.json");
-        WeatherResponse expectedResponse = new WeatherResponse("Rain");
+        WeatherResponse expectedResponse = new WeatherResponse("Clouds");
 
         WeatherResponse parsedResponse = new ObjectMapper().readValue(jsonResponse, WeatherResponse.class);
 

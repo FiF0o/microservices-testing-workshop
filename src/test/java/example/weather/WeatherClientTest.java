@@ -26,13 +26,13 @@ public class WeatherClientTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        subject = new WeatherClient(restTemplate, "http://localhost:8089", "someAppId");
+        subject = new WeatherClient(restTemplate, "http://localhost:8089", "some-app-id");
     }
 
     @Test
     public void shouldCallWeatherService() throws Exception {
         WeatherResponse expectedResponse = new WeatherResponse("light rain");
-        given(restTemplate.getForObject("http://localhost:8089/someAppId/53.5511,9.9937", WeatherResponse.class))
+        given(restTemplate.getForObject("http://localhost:8089/data/2.5/weather?q=Bangkok&units=metric&appid=some-app-id", WeatherResponse.class))
                 .willReturn(expectedResponse);
 
         Optional<WeatherResponse> actualResponse = subject.fetchWeather();
@@ -42,7 +42,7 @@ public class WeatherClientTest {
 
     @Test
     public void shouldReturnEmptyOptionalIfWeatherServiceIsUnavailable() throws Exception {
-        given(restTemplate.getForObject("http://localhost:8089/someAppId/53.5511,9.9937", WeatherResponse.class))
+        given(restTemplate.getForObject("http://localhost:8089/data/2.5/weather?q=Bangkok&units=metric&appid=some-app-id", WeatherResponse.class))
                 .willThrow(new RestClientException("something went wrong"));
 
         Optional<WeatherResponse> actualResponse = subject.fetchWeather();
