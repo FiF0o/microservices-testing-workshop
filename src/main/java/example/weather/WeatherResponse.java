@@ -32,7 +32,7 @@ public class WeatherResponse {
 
         WeatherResponse response = (WeatherResponse) o;
 
-        return weather != null ? weather.equals(response.weather) : response.weather == null;
+        return Objects.equals(weather, response.weather);
     }
 
     @Override
