@@ -51,4 +51,11 @@ public class HelloE2ESeleniumTest {
 
         assertThat(body.getText(), containsString("Hello World!"));
     }
+
+
+    @Test
+    public void weatherPageHasTextWeatherStatus() {
+        // ToDo : Write test that browser open weather page and verify that text display
+
+    }
 }

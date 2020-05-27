@@ -49,4 +49,14 @@ public class HelloE2ERestTest {
                 .statusCode(is(200))
                 .body(containsString("Hello Peter Pan!"));
     }
+
+    @Test
+    public void shouldReturnNotFoundPerson() throws Exception {
+        // ToDo : Write test that API call person and not found
+    }
+
+    @Test
+    public void shouldReturnWeather() throws Exception {
+        // ToDo : Write test that API call and get output from weather
+    }
 }
