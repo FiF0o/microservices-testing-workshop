@@ -44,9 +44,7 @@ public class ExampleControllerAPITest {
         Person peter = new Person("Peter", "Pan");
         given(personRepository.findByLastName("Pan")).willReturn(Optional.of(peter));
 
-        mockMvc.perform(get("/hello/Pan"))
-                .andExpect(content().string("Hello Peter Pan!"))
-                .andExpect(status().is2xxSuccessful());
+        // ToDo :
     }
 
     @Test
@@ -54,8 +52,6 @@ public class ExampleControllerAPITest {
         WeatherResponse weatherResponse = new WeatherResponse("Hamburg, 8°C raining");
         given(weatherClient.fetchWeather()).willReturn(Optional.of(weatherResponse));
 
-        mockMvc.perform(get("/weather"))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(content().string("Hamburg, 8°C raining"));
+        // ToDo:
     }
 }

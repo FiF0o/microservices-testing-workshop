@@ -43,9 +43,7 @@ public class ExampleControllerTest {
         Person peter = new Person("Peter", "Pan");
         given(personRepository.findByLastName("Pan")).willReturn(Optional.of(peter));
 
-        String greeting = subject.hello("Pan");
-
-        assertThat(greeting, is("Hello Peter Pan!"));
+        // ToDo :
     }
 
     @Test
@@ -54,7 +52,7 @@ public class ExampleControllerTest {
 
         String greeting = subject.hello("Pan");
 
-        assertThat(greeting, is("Who is this 'Pan' you're talking about?"));
+        // ToDo :
     }
 
     @Test
